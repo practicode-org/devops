@@ -1,0 +1,7 @@
+pullPolicy: Never
+
+client:
+  mountDist: "/Volumes/case-sensitive/development/practicode/editor-demo/dist"
+
+backend:
+  mountSrc: "/Volumes/case-sensitive/development/practicode/practicode-backend/practicode_backend"

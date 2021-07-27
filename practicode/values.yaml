@@ -1,0 +1,24 @@
+pullPolicy: Never
+
+client:
+  hostName: "practicode.local.k8s"
+  image:
+    name: "practicode-client"
+    version: "latest"
+  replicas: 1
+  mountDist: ""
+
+backend:
+  hostName: "practicode-endpoint.local.k8s"
+  image:
+    name: "practicode-backend"
+    version: "latest"
+  replicas: 1
+  mountSrc: ""
+
+runjail:
+  hostName: "practicode-runjail.local.k8s"
+  image:
+    name: "practicode-runjail"
+    version: "latest"
+  replicas: 1

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}--runjail-service
+spec:
+  ports:
+    - name: "websocket"
+      port: 1556
+      targetPort: 1556
+  selector:
+    app: {{ .Release.Name }}--runjail
+

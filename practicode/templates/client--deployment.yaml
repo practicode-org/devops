@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}--client
+spec:
+  replicas: {{ .Values.client.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}--client
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}--client
+        app.kubernetes.io/name: {{ .Release.Name }}--client
+    spec:
+      containers:
+        - image: {{ .Values.client.image.name }}:{{ .Values.client.image.version }}
+          name: client
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - containerPort: 80
+          {{ if .Values.client.mountDist }}
+          volumeMounts:
+            - mountPath: /app
+              name: app-dist
+          {{ end }}
+          env:
+            - name: PRACTICODE_BACKEND_ENDPOINT
+              value: http://practicode-endpoint.local.k8s
+            - name: NGINX_ENVSUBST_OUTPUT_DIR
+              value: /etc/nginx
+      {{ if .Values.client.mountDist }}
+      volumes:
+        - name: app-dist
+          hostPath:
+            path: {{ .Values.client.mountDist }}
+      {{ end }}
