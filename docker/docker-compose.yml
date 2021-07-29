@@ -1,0 +1,27 @@
+services:
+
+  backend:
+    image: practicode-backend:latest
+    restart: unless-stopped
+    environment:
+      BACKEND_HOST: localhost:8000
+      CLIENT_HOST: localhost:8080
+      RUNNER_HOST: localhost:1556
+    ports:
+      - "8000:8000"
+    command: "poetry run python manage.py runserver 0.0.0.0:8000"
+
+  client:
+    image: practicode-client
+    restart: unless-stopped
+    environment:
+      BACKEND_HOST: localhost:8000
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
+    ports:
+      - "8080:80"
+
+  runner:
+    image: practicode-runjail
+    restart: unless-stopped
+    ports:
+      - "1556:1556"
