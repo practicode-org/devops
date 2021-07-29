@@ -51,12 +51,12 @@ spec:
               name: src
             {{ end }}
           env:
-            - name: PRACTICODE_BACKEND_ENDPOINT
+            - name: BACKEND_HOST
               value: {{ .Values.backend.hostName }}
-            - name: PRACTICODE_CLIENT_HOST
-              value: http://{{ .Values.client.hostName }}
-            - name: PRACTICODE_RUNJAIL_WEBSOCKET
-              value: ws://{{ .Values.runjail.hostName }}/run
+            - name: CLIENT_HOST
+              value: {{ .Values.client.hostName }}
+            - name: RUNNER_HOST
+              value: {{ .Values.runjail.hostName }}
           readinessProbe:
             tcpSocket:
               port: 8000

@@ -15,27 +15,8 @@ backend:
     version: "latest"
   replicas: 1
   mountSrc: ""
-  runjailPool:
-    - cpp-runjail
-    - go-runjail
-    - py-runjail
-    - cpp2-runjail
 
 runjail:
-  hostName: "practicode-runjail.local.k8s"
-  image:
-    name: "practicode-runjail"
-    version: "latest"
-  replicas: 1
-
-cpp-runjail:
-  hostName: "practicode-runjail.local.k8s"
-  image:
-    name: "practicode-runjail"
-    version: "latest"
-  replicas: 1
-
-cpp2-runjail:
   hostName: "practicode-runjail.local.k8s"
   image:
     name: "practicode-runjail"
