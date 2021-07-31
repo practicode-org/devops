@@ -9,7 +9,13 @@ services:
       RUNNER_HOST: localhost:1556
     ports:
       - "8000:8000"
-    command: "poetry run python manage.py runserver 0.0.0.0:8000"
+    command:
+      - poetry
+      - run
+      - python
+      - manage.py
+      - runserver
+      - 0.0.0.0:8000
 
   client:
     image: practicode-client
@@ -20,8 +26,9 @@ services:
     ports:
       - "8080:80"
 
-  runner:
-    image: practicode-runjail
+  runner-cpp:
+    image: practicode-runner-cpp
     restart: unless-stopped
     ports:
       - "1556:1556"
+    privileged: true
